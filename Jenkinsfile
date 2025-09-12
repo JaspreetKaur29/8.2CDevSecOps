@@ -31,7 +31,7 @@ pipeline {
       environment {
         SONAR_SCANNER_DIR = "${WORKSPACE}/.sonar/sonar-scanner"
         SONAR_SCANNER_ZIP = "${WORKSPACE}/.sonar/sonar-scanner.zip"
-        SONAR_SCANNER_URL = "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip"
+        SONAR_SCANNER_URL = "SONAR_SCANNER_URL = "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006.zip"
         SONAR_PROJECT_KEY = "JaspreetKaur29_8.2CDevSecOps"
         SONAR_ORG        = "jaspreetkaur29"
         SONAR_HOST       = "https://sonarcloud.io"
