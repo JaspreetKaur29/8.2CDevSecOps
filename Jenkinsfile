@@ -29,7 +29,7 @@ pipeline {
  }
     stage('SonarCloud Analysis') {
       environment {
-        SONAR_SCANNER_DIR = "${WORKSPACE}/.sonar/sonar-scanner"
+        SONAR_SCANNER_DIR = '.sonar/sonar-scanner'
         SONAR_VERSION = '5.0.1.3006'
       }
       steps {
