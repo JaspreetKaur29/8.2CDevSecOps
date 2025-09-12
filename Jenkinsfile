@@ -27,15 +27,20 @@ pipeline {
         sh 'npm audit || true'
       }
     }
-stage('SonarCloud Analysis (Docker)') {
-  environment {
-    SONAR_TOKEN = credentials('SONAR_TOKEN')
-  }
-  agent { docker { image 'sonarsource/sonar-scanner-cli:latest' } }
-  steps {
-    sh 'sonar-scanner -Dsonar.login="$SONAR_TOKEN"'
-  }
 }
+    stage('SonarCloud Analysis') {
+      steps {
+        withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+          sh '''
+            SCAN_VER=5.0.1.3006
+            curl -sSL -o sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCAN_VER}-linux-x64.zip
+            rm -rf .sonar-scanner && mkdir -p .sonar-scanner
+            unzip -q sonar.zip -d .sonar-scanner
+            export PATH="$PWD/.sonar-scanner/sonar-scanner-${SCAN_VER}-linux-x64/bin:$PATH"
+            sonar-scanner -Dsonar.login=${SONAR_TOKEN}
+          '''
+        }
+      }
+    }
 
-}
 }
