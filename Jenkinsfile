@@ -30,7 +30,7 @@ pipeline {
     stage('SonarCloud Analysis') {
       environment {
         SONAR_SCANNER_DIR = "${WORKSPACE}/.sonar/sonar-scanner"
-        SONAR_VERSION = "5.0.1.3006'
+        SONAR_VERSION = '5.0.1.3006'
       }
       steps {
         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
