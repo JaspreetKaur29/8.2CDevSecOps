@@ -27,8 +27,6 @@ pipeline {
  sh 'npm audit || true' // This will show known CVEs in the output
  }
  }
- }
-}
     stage('SonarCloud Analysis') {
       environment {
         SONAR_SCANNER_DIR = "${WORKSPACE}/.sonar/sonar-scanner"
@@ -61,4 +59,5 @@ pipeline {
         }
       }
     }
-
+}
+}
