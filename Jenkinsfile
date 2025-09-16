@@ -30,21 +30,14 @@ pipeline {
           stage('SonarCloud Analysis') {
     steps {
 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-        withEnv([
-            'JAVA_HOME=/opt/java/openjdk',
-            'PATH+JAVA=${JAVA_HOME}/bin',
-            'SONAR_SCANNER_HOME=/opt/sonar-scanner-5.0.1.3006/bin',
-            'PATH+SONAR=${SONAR_SCANNER_HOME}'
-        ]) {
-            sh '''
-                sonar-scanner \
-                  -Dsonar.projectKey=JaspreetKaur29_8.2CDevSecOps \
-                  -Dsonar.organization=jaspreetkaur29 \
-                  -Dsonar.host.url=https://sonarcloud.io \
-                  -Dsonar.sources=. \
-                  -Dsonar.token=$SONAR_TOKEN
-            '''
-        }
+        sh '''
+            npx sonar-scanner \
+              -Dsonar.projectKey=JaspreetKaur29_8.2CDevSecOps \
+              -Dsonar.organization=jaspreetkaur29 \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.sources=. \
+              -Dsonar.token=$SONAR_TOKEN
+          '''
 }
 }
 }
