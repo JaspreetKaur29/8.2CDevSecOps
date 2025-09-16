@@ -34,3 +34,5 @@ withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')])
 }
 }
 }
+}
+}
