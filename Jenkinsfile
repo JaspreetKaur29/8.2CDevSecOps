@@ -28,19 +28,24 @@ pipeline {
       }
     }
 }
-    stage('SonarCloud Analysis') {
-      steps {
-        withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-          sh '''
-            SCAN_VER=5.0.1.3006
-            curl -sSL -o sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCAN_VER}-linux-x64.zip
-            rm -rf .sonar-scanner && mkdir -p .sonar-scanner
-            unzip -q sonar.zip -d .sonar-scanner
-            export PATH="$PWD/.sonar-scanner/sonar-scanner-${SCAN_VER}-linux-x64/bin:$PATH"
-            sonar-scanner -Dsonar.login=${SONAR_TOKEN}
-          '''
+          stage('SonarCloud Analysis') {
+    steps {
+        withEnv([
+            "SONAR_SCANNER_HOME=/opt/sonar-scanner-5.0.1.3006-linux/bin",
+            "PATH+SONAR=${env.SONAR_SCANNER_HOME}"
+        ]) {
+            sh '''
+                sonar-scanner \
+                  -Dsonar.projectKey=JaspreetKaur29_8.2CDevSecOps \
+                  -Dsonar.organization=jaspreetkaur29 \
+                  -Dsonar.host.url=https://sonarcloud.io \
+                  -Dsonar.sources=. \
+                  -Dsonar.token=$SONAR_TOKEN
+            '''
         }
-      }
     }
+}
 
+}
+}
 }
