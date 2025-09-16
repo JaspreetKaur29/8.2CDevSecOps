@@ -29,6 +29,7 @@ pipeline {
     }
           stage('SonarCloud Analysis') {
     steps {
+withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
         withEnv([
             'JAVA_HOME=/opt/java/openjdk',
             'PATH+JAVA=${JAVA_HOME}/bin',
