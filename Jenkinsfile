@@ -31,8 +31,10 @@ pipeline {
           stage('SonarCloud Analysis') {
     steps {
         withEnv([
-            "SONAR_SCANNER_HOME=/opt/sonar-scanner-5.0.1.3006-linux/bin",
-            "PATH+SONAR=${env.SONAR_SCANNER_HOME}"
+            'JAVA_HOME=/opt/java/openjdk',
+            'PATH+JAVA=${JAVA_HOME}/bin',
+            'SONAR_SCANNER_HOME=/opt/sonar-scanner-5.0.1.3006/bin',
+            'PATH+SONAR=${SONAR_SCANNER_HOME}'
         ]) {
             sh '''
                 sonar-scanner \
@@ -46,6 +48,11 @@ pipeline {
     }
 }
 
+}
+}
+post {
+    always {
+      archiveArtifacts artifacts: 'coverage/**/*', allowEmptyArchive: true
 }
 }
 }
