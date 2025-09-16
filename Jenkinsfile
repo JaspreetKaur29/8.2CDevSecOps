@@ -13,7 +13,7 @@ pipeline {
  }
  stage('Run Tests') {
  steps {
- sh 'npm test || true' // Allows pipeline to continue despite test failures
+ sh 'npm test || true'
  }
  }
  stage('Generate Coverage Report') {
@@ -27,7 +27,7 @@ pipeline {
         sh 'npm audit || true'
       }
     }
-}
+
           stage('SonarCloud Analysis') {
     steps {
         withEnv([
