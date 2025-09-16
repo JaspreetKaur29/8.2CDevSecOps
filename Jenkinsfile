@@ -27,7 +27,7 @@ pipeline {
         sh 'npm audit || true'
       }
     }
-
+}
           stage('SonarCloud Analysis') {
     steps {
         withEnv([
@@ -45,14 +45,7 @@ pipeline {
                   -Dsonar.token=$SONAR_TOKEN
             '''
         }
-    }
 }
-
-}
-}
-post {
-    always {
-      archiveArtifacts artifacts: 'coverage/**/*', allowEmptyArchive: true
 }
 }
 }
