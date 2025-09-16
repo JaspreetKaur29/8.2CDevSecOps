@@ -27,7 +27,6 @@ pipeline {
         sh 'npm audit || true'
       }
     }
-}
           stage('SonarCloud Analysis') {
     steps {
         withEnv([
@@ -45,6 +44,7 @@ pipeline {
                   -Dsonar.token=$SONAR_TOKEN
             '''
         }
+}
 }
 }
 }
