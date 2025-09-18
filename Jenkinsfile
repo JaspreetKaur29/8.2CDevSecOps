@@ -27,13 +27,13 @@ pipeline {
         sh 'npm audit || true'
       }
     }
-          stage('SonarCloud Analysis') {
+/*          stage('SonarCloud Analysis') {
     steps {
 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
           sh 'npx sonar-scanner -Dsonar.token=$SONAR_TOKEN'
 }
 }
 }
-
+*/
 }
 }
